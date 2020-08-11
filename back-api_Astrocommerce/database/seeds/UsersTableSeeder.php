@@ -38,9 +38,9 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'Fábio Santana',
-            'email' => 'fabio27336f@gmail.com',
+            'email' => 'user@user.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678F@'),
+            'password' => Hash::make('12345678U@'),
             'gender' => 'masculine',
             'phone' => '+55 (11) 98707-5393',
             'cep' => '08573-000',
