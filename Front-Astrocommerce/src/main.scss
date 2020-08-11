@@ -1,0 +1,18 @@
+// Libs
+@import './scss/libs.scss';
+
+// Variables
+@import './scss/variables.scss';
+
+// Pages Styles
+@import './scss/pages/Home.scss';
+@import './scss/pages/Login.scss';
+@import './scss/pages/Profile.scss';
+@import './scss/pages/Admin/Dashboards.scss';
+@import './scss/pages/Admin/Order_Product.scss';
+
+// Components Styles
+@import './scss/components/HomeProduct.scss';
+@import './scss/components/NavUser.scss';
+@import './scss/components/NavAdmin.scss';
+
