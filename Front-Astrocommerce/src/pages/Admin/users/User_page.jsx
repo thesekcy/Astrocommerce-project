@@ -111,7 +111,7 @@ function UserPage({ match }) {
       })
         .then(function (response) {
           console.log(response.data);
-          if (response.data === true) {
+          if (response.data == true) {
             setRedirect(true);
           }
         })

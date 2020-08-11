@@ -1,49 +1,54 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Axios from 'axios';
-import { Editor } from '@tinymce/tinymce-react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
+import Axios from "axios";
+import { Editor } from "@tinymce/tinymce-react";
+import { Redirect } from "react-router-dom";
 
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import moment from "moment";
+import "moment/locale/pt-br";
 
-import { Context } from '../../../context/authContext';
+import { Context } from "../../../context/authContext";
 
-import { BsArrowLeft } from 'react-icons/bs';
-import { FiCalendar } from 'react-icons/fi';
-import { BsEyeSlash, BsEye } from 'react-icons/bs';
+import { BsArrowLeft } from "react-icons/bs";
+import { FiCalendar } from "react-icons/fi";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 
-import loadingGif from '../../../assets/img/loading.gif';
+import loadingGif from "../../../assets/img/loading.gif";
 
-import NavAdmin from '../../../components/Admin/NavAdmin/NavAdmin';
-import NavBarAdmin from '../../../components/Admin/NavBarAdmin/NavBarAdmin';
-import history from '../../../history';
+import NavAdmin from "../../../components/Admin/NavAdmin/NavAdmin";
+import NavBarAdmin from "../../../components/Admin/NavBarAdmin/NavBarAdmin";
+import history from "../../../history";
 
 function ProductPage({ match }) {
   const { user } = useContext(Context);
 
   const [visibility, setVisibility] = useState(true);
   const [produto, setProduto] = useState();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('');
-  const [image, setImage] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
+  const [image, setImage] = useState("");
   const [vfyImage, setVfyImage] = useState(false);
-  const [dtCriacao, setDtCriacao] = useState('');
+  const [dtCriacao, setDtCriacao] = useState("");
   const [ordermID, setOrdemID] = useState(match.params.id);
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  moment.locale('pt-br');
+  moment.locale("pt-br");
 
   useEffect(() => {
     function getProduct() {
-      const token = localStorage.getItem('token');
-      const url = 'http://127.0.0.1:8000/api/products/show';
+      const token = localStorage.getItem("token");
+      const url = "http://127.0.0.1:8000/api/products/show";
 
       const formData = new FormData();
-      formData.append('id', ordermID);
+      formData.append("id", ordermID);
 
-      Axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } })
+      Axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((response) => {
           console.log(response.data[0]);
           let data = response.data[0];
@@ -53,7 +58,7 @@ function ProductPage({ match }) {
           setTitle(data.name);
           setDescription(data.description);
           setStatus(data.status);
-          setDtCriacao(moment(data.created_at).format('LLL'));
+          setDtCriacao(moment(data.created_at).format("LLL"));
           setImage(`http://127.0.0.1:8000/uploads/images/store/${data.image}`);
           setLoading(false);
         })
@@ -76,29 +81,34 @@ function ProductPage({ match }) {
   }
 
   function saveProduct() {
-    const token = localStorage.getItem('token');
-    const url = 'http://127.0.0.1:8000/api/products/update';
+    const token = localStorage.getItem("token");
+    const url = "http://127.0.0.1:8000/api/products/update";
 
     const saveData = new FormData();
-    saveData.append('id', produto.id);
-    saveData.append('name', title);
-    saveData.append('visibility', visibility);
-    saveData.append('description', description);
-    if (user.type === 'editor') {
-      saveData.append('status', 'pending');
+    saveData.append("id", produto.id);
+    saveData.append("name", title);
+    saveData.append("visibility", visibility);
+    saveData.append("description", description);
+    if (user.type === "editor") {
+      saveData.append("status", "pending");
     } else {
-      saveData.append('status', status);
+      saveData.append("status", status);
     }
 
     if (vfyImage) {
-      saveData.append('image', image);
+      saveData.append("image", image);
     }
-    saveData.append('_method', 'put');
+    saveData.append("_method", "put");
 
-    Axios.post(url, saveData, { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } })
+    Axios.post(url, saveData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
         console.log(response.data);
-        if (response.data === true) {
+        if (response.data == true) {
           setRedirect(true);
         }
       })
@@ -131,8 +141,12 @@ function ProductPage({ match }) {
             <div className="container pd-t-40 pd-b-40 col-md-11">
               <div className="row">
                 <div className="col-md">
-                  <button className="btn-back d-flex align-items-center" onClick={() => history.push('/admin/produtos')}>
-                    <BsArrowLeft stroke-width="0.5" /> <small className="pl-3">Produtos</small>
+                  <button
+                    className="btn-back d-flex align-items-center"
+                    onClick={() => history.push("/admin/produtos")}
+                  >
+                    <BsArrowLeft stroke-width="0.5" />{" "}
+                    <small className="pl-3">Produtos</small>
                   </button>
                 </div>
               </div>
@@ -140,19 +154,55 @@ function ProductPage({ match }) {
                 <div className="col-md-auto">
                   <div className="d-flex align-items-center">
                     <span className="order-title mb-0 mr-3">
-                      <span className="order-number">{produto ? produto.name : ''}</span>
+                      <span className="order-number">
+                        {produto ? produto.name : ""}
+                      </span>
                     </span>
-                    {status === 'pending' ? <badge className="badge badge-warning mr-1 ml-1">Pendente</badge> : ''}
-                    {status === 'waiting' ? <badge className="badge badge-warning mr-1 ml-1">Em Analise</badge> : ''}
-                    {status === 'approved' ? <badge className="badge badge-success mr-1 ml-1">Aprovado</badge> : ''}
-                    {status === 'disapproved' ? <badge className="badge badge-danger mr-1 ml-1">Reprovado</badge> : ''}
+                    {status === "pending" ? (
+                      <badge className="badge badge-warning mr-1 ml-1">
+                        Pendente
+                      </badge>
+                    ) : (
+                      ""
+                    )}
+                    {status === "waiting" ? (
+                      <badge className="badge badge-warning mr-1 ml-1">
+                        Em Analise
+                      </badge>
+                    ) : (
+                      ""
+                    )}
+                    {status === "approved" ? (
+                      <badge className="badge badge-success mr-1 ml-1">
+                        Aprovado
+                      </badge>
+                    ) : (
+                      ""
+                    )}
+                    {status === "disapproved" ? (
+                      <badge className="badge badge-danger mr-1 ml-1">
+                        Reprovado
+                      </badge>
+                    ) : (
+                      ""
+                    )}
                     <div className="span ml-4 border-left d-flex">
-                      <FiCalendar stroke-width="1.8" color="#96A9C8" size="22" className="ml-4 mr-2" /> {dtCriacao}
+                      <FiCalendar
+                        stroke-width="1.8"
+                        color="#96A9C8"
+                        size="22"
+                        className="ml-4 mr-2"
+                      />{" "}
+                      {dtCriacao}
                     </div>
                   </div>
                 </div>
                 <div className="col-md-auto ml-auto">
-                  <button className="btn btn-default float-right ml-2" onClick={saveProduct} type="button">
+                  <button
+                    className="btn btn-default float-right ml-2"
+                    onClick={saveProduct}
+                    type="button"
+                  >
                     Atualizar
                   </button>
                 </div>
@@ -164,28 +214,73 @@ function ProductPage({ match }) {
                       <div className="col-xl-12 col-lg-12 mb-xl-0">
                         <div className="card">
                           <div className="card-body">
+                            <div className="row align-items-center">
+                              <div className="col-md-auto">
+                                <div className="media product-card">
+                                  {vfyImage ? (
+                                    <img
+                                      className="mr-3"
+                                      className="img-fluid img-product"
+                                      src={URL.createObjectURL(image)}
+                                      alt="Generic placeholder image"
+                                    />
+                                  ) : (
+                                    <img
+                                      className="mr-3"
+                                      className="img-fluid img-product"
+                                      src={image}
+                                      alt="Generic placeholder image"
+                                    />
+                                  )}
+                                  <div className="media-body pl-5 align-self-center">
+                                    <input
+                                      type="file"
+                                      name="file"
+                                      onChange={(event) => getImage(event)}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="row pd-t-10">
+                      <div className="col-xl-12 col-lg-12 mb-xl-0">
+                        <div className="card">
+                          <div className="card-body">
                             <div className="row pd-b-20">
                               <div className="col-md">
                                 <div className="title-qtd-products">
-                                  <span className="title">Informações gerais</span>
+                                  <span className="title">
+                                    Informações gerais
+                                  </span>
                                 </div>
                               </div>
                             </div>
                             <div className="row">
                               <div className="col-md">
                                 <div className="form-group">
-                                  <label for="exampleFormControlInput1">Nome do produto</label>
+                                  <label for="exampleFormControlInput1">
+                                    Nome do produto
+                                  </label>
                                   <input
                                     type="email"
                                     className="form-control"
                                     value={title}
-                                    onChange={(event) => setTitle(event.target.value)}
+                                    onChange={(event) =>
+                                      setTitle(event.target.value)
+                                    }
                                     id="exampleFormControlInput1"
                                     placeholder="name@example.com"
                                   />
                                 </div>
                                 <div className="form-group">
-                                  <label for="exampleFormControlInput1">Descrição do produto</label>
+                                  <label for="exampleFormControlInput1">
+                                    Descrição do produto
+                                  </label>
                                   <Editor
                                     initialValue={description}
                                     value={description}
@@ -193,16 +288,18 @@ function ProductPage({ match }) {
                                       height: 500,
                                       menubar: false,
                                       plugins: [
-                                        'advlist autolink lists link image charmap print preview anchor',
-                                        'searchreplace visualblocks code fullscreen',
-                                        'insertdatetime media table paste code help wordcount',
+                                        "advlist autolink lists link image charmap print preview anchor",
+                                        "searchreplace visualblocks code fullscreen",
+                                        "insertdatetime media table paste code help wordcount",
                                       ],
                                       toolbar:
-                                        'undo redo | formatselect | bold italic backcolor | \
+                                        "undo redo | formatselect | bold italic backcolor | \
              alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help',
+             bullist numlist outdent indent | removeformat | help",
                                     }}
-                                    onEditorChange={(content, editor) => handleEditorChange(content, editor)}
+                                    onEditorChange={(content, editor) =>
+                                      handleEditorChange(content, editor)
+                                    }
                                   />
                                 </div>
                               </div>
@@ -223,17 +320,39 @@ function ProductPage({ match }) {
                                   <span className="title">Visibilidade</span>
                                 </div>
                                 <p>
-                                  <small>Seu público pode ver este produto?</small>
+                                  <small>
+                                    Seu público pode ver este produto?
+                                  </small>
                                 </p>
                               </div>
                             </div>
                             <div className="row align-items-center">
                               <div className="col-md">
-                                <div className={visibility ? 'visibilidade d-flex align-items-center' : 'visibilidade d-flex align-items-center not-visible'}>
-                                  <div className="icon-box">{visibility ? <BsEye color={'white'} size="25" /> : <BsEyeSlash color={'white'} size="25" />}</div>
-                                  <h3 className="mb-0 pl-3">{visibility ? 'Visivel' : 'Não Visivel'}</h3>
+                                <div
+                                  className={
+                                    visibility
+                                      ? "visibilidade d-flex align-items-center"
+                                      : "visibilidade d-flex align-items-center not-visible"
+                                  }
+                                >
+                                  <div className="icon-box">
+                                    {visibility ? (
+                                      <BsEye color={"white"} size="25" />
+                                    ) : (
+                                      <BsEyeSlash color={"white"} size="25" />
+                                    )}
+                                  </div>
+                                  <h3 className="mb-0 pl-3">
+                                    {visibility ? "Visivel" : "Não Visivel"}
+                                  </h3>
                                   <label className="custom-toggle ml-auto mb-0">
-                                    <input type="checkbox" checked={visibility ? 'checked' : ''} onChange={() => setVisibility(!visibility)} />
+                                    <input
+                                      type="checkbox"
+                                      checked={visibility ? "checked" : ""}
+                                      onChange={() =>
+                                        setVisibility(!visibility)
+                                      }
+                                    />
                                     <span className="custom-toggle-slider rounded-circle" />
                                   </label>
                                 </div>
@@ -244,22 +363,30 @@ function ProductPage({ match }) {
                       </div>
                     </div>
                     {user ? (
-                      user.type === 'editor' ? (
-                        ''
+                      user.type === "editor" ? (
+                        ""
                       ) : (
                         <div className="row pd-t-20">
                           <div className="col-md">
-                            {status === 'approved' ? (
-                              ''
+                            {status === "approved" ? (
+                              ""
                             ) : (
-                              <button className="btn btn-success w-100 mb-3" onClick={() => setStatus('approved')} type="button">
+                              <button
+                                className="btn btn-success w-100 mb-3"
+                                onClick={() => setStatus("approved")}
+                                type="button"
+                              >
                                 Aprovar
                               </button>
                             )}
-                            {status === 'disapproved' ? (
-                              ''
+                            {status === "disapproved" ? (
+                              ""
                             ) : (
-                              <button className="btn btn-danger w-100" onClick={() => setStatus('disapproved')} type="button">
+                              <button
+                                className="btn btn-danger w-100"
+                                onClick={() => setStatus("disapproved")}
+                                type="button"
+                              >
                                 Reprovar
                               </button>
                             )}
@@ -267,7 +394,7 @@ function ProductPage({ match }) {
                         </div>
                       )
                     ) : (
-                      ''
+                      ""
                     )}
                   </div>
                 </div>
