@@ -73,6 +73,9 @@ Após isso o front já está preparado para entrar em funcionamento loca, basta 
   E aguardar, uma janela sera aberta no seu navegador e você já pode começar a fazer uso. 
   *Os dados de administrador está na sessão acima.*
 
+Para ficar visualmente mais bonito, se possivel utilize as imagens localizadas em 
+
+> front-Astrocommerce/src/images_examples
 
 ## Detalhe de status dos produtos
 
