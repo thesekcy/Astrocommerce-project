@@ -30,6 +30,10 @@ Após isso, faça uma copia do arquivo **.env.example** e renomeie ele para apen
 Lembrando que o frontend está esperando uma resposta da url `127.0.0.1:8000` 
 *Lembre-se de criar a Database e mudar o nome dela no .env, caso contrario os passos a seguir não funcionaram.*
 
+Agora rode o comendo abaixo para criar a chave de autenticação JWT, Sem esse comando as requisições no front-end não funcionaram.
+
+    php artisan jwt:secret
+
 Agora vamos criar as tabelas e popular o banco de dados com um usuário Administrador, Editor e um usuário comum. Para isso vá no terminal ainda no diretório do projeto e rode:
 
     php artisan migrate --seed
