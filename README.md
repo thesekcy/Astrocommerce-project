@@ -6,6 +6,7 @@ O backend é feito em Laravel 7 e o Front end em React.
 - Node
 - Wamp, Xampp, ou qualquer outro servidor php localhost com acesso a banco de dados mysql.
 
+**Nota**: A função de pedidos (orders) não foi implementada apenas idealizada, por isso tem resquícios da mesma no painel administrador e no perfil do usuário.
 
 ## Back-end
 
