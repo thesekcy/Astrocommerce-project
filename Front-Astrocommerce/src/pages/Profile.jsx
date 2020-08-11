@@ -16,7 +16,6 @@ import history from "../history";
 function Profile() {
   const [userGet, setUserGet] = useState({});
   const [loading, setLoading] = useState(true);
-
   const { handleLogout, setTypeUser } = useContext(Context);
 
   useEffect(() => {
@@ -33,8 +32,8 @@ function Profile() {
 
       Axios(config)
         .then(function (response) {
-          if (response.data.type == "admin") setTypeUser("admin");
-          if (response.data.type == "editor") setTypeUser("editor");
+          if (response.data.type === "admin") setTypeUser("admin");
+          if (response.data.type === "editor") setTypeUser("editor");
           setUserGet(response.data);
           setLoading(false);
         })
@@ -85,7 +84,7 @@ function Profile() {
                           <div className="row align-items-center">
                             <div className="col-md">
                               <div className="media align-items-center product-card">
-                                {userGet.gender == "masculine" ? (
+                                {userGet.gender === "masculine" ? (
                                   <img
                                     className="mr-3"
                                     className="img-fluid img-perfil"

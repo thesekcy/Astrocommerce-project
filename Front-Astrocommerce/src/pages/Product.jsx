@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import HomeProduct from "../components/HomeProduct/HomeProduct";
 import NavUser from "../components/NavUser/NavUser";
 
 import ReactHtmlParser from "react-html-parser";
 
-import { BsArrowLeft } from 'react-icons/bs';
+import { BsArrowLeft } from "react-icons/bs";
 import loadingGif from "../assets/img/loading.gif";
 
-import history from '../history';
-
+import history from "../history";
 
 function Home({ match }) {
-  const productId = match.params.id;
+  const [productId, setProductId] = useState(match.params.id);
 
   const [product, setProduct] = useState("");
   const [loading, setLoading] = useState(true);
@@ -63,9 +61,12 @@ function Home({ match }) {
         <NavUser />
         <section className="homePage ">
           <div className="container pd-t-80">
-          <div className="row pd-t-20">
+            <div className="row pd-t-20">
               <div className="col-md">
-                <button className="btn-back d-flex align-items-center" onClick={() => history.push('/')}>
+                <button
+                  className="btn-back d-flex align-items-center"
+                  onClick={() => history.push("/")}
+                >
                   <BsArrowLeft /> <small className="pl-3">Página Inicial</small>
                 </button>
               </div>
@@ -88,7 +89,7 @@ function Home({ match }) {
                                   {product.name}
                                 </h2>
                                 <h3>Descrição:</h3>
-                                <hr/>
+                                <hr />
                                 <div>
                                   {ReactHtmlParser(product.description)}{" "}
                                 </div>

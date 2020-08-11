@@ -80,7 +80,7 @@ function UserPage({ match }) {
       setVfyEmail(true);
     }
 
-    if (type == 'Selecione uma opção' || type == '') {
+    if (type === 'Selecione uma opção' || type === '') {
       setVfyType(false);
       verify = false;
     } else {
@@ -91,7 +91,7 @@ function UserPage({ match }) {
       const token = localStorage.getItem('token');
       const url = 'http://127.0.0.1:8000/api/users/update';
       const updateData = new FormData();
-      if (type == 'user') {
+      if (type === 'user') {
         updateData.append('access', access);
       } else {
         updateData.append('id', UserID);
@@ -111,7 +111,7 @@ function UserPage({ match }) {
       })
         .then(function (response) {
           console.log(response.data);
-          if (response.data == true) {
+          if (response.data === true) {
             setRedirect(true);
           }
         })
@@ -187,7 +187,7 @@ function UserPage({ match }) {
                                     placeholder="Nome"
                                     value={name}
                                     autoComplete="no"
-                                    readOnly={user.type == 'admin' ? (type == 'user' ? true : false) : true}
+                                    readOnly={user.type === 'admin' ? (type === 'user' ? true : false) : true}
                                   />
                                 </div>
                                 <div className="form-group">
@@ -199,11 +199,11 @@ function UserPage({ match }) {
                                     placeholder="Email"
                                     autoComplete="no"
                                     value={email}
-                                    readOnly={user.type == 'admin' ? (type == 'user' ? true : false) : true}
+                                    readOnly={user.type === 'admin' ? (type === 'user' ? true : false) : true}
                                   />
                                 </div>
 
-                                {type == 'user' ? (
+                                {type === 'user' ? (
                                   ''
                                 ) : (
                                   <div className="form-group">
@@ -211,14 +211,14 @@ function UserPage({ match }) {
                                     <select
                                       type="text"
                                       class={vfyType ? 'form-control' : 'is-invalid form-control'}
-                                      disabled={user.type == 'admin' ? (type == 'user' ? true : false) : true}
+                                      disabled={user.type === 'admin' ? (type === 'user' ? true : false) : true}
                                       onChange={(event) => setType(event.target.value)}
                                     >
                                       <option>Selecione uma opção</option>
-                                      <option value="admin" selected={type == 'admin' ? true : false}>
+                                      <option value="admin" selected={type === 'admin' ? true : false}>
                                         Administrador
                                       </option>
-                                      <option value="editor" selected={type == 'editor' ? true : false}>
+                                      <option value="editor" selected={type === 'editor' ? true : false}>
                                         Editor
                                       </option>
                                     </select>
@@ -226,7 +226,7 @@ function UserPage({ match }) {
                                 )}
 
                                 {type ? (
-                                  type == 'user' ? (
+                                  type === 'user' ? (
                                     <>
                                       <div className="row">
                                         <div className="col-md-6">
@@ -312,7 +312,7 @@ function UserPage({ match }) {
                                   <div className="icon-box">{access ? <FiUnlock color={'white'} size="25" /> : <FiLock color={'white'} size="25" />}</div>
                                   <h3 className="mb-0 pl-3">{access ? 'Liberado' : 'Negado'}</h3>
                                   <label className="custom-toggle ml-auto mb-0">
-                                    <input type="checkbox" checked={access ? 'checked' : ''} disabled={user.type == 'admin' ? (type == 'user' ? true : false) : true} onChange={() => setAccess(!access)} />
+                                    <input type="checkbox" checked={access ? 'checked' : ''} disabled={user.type === 'admin' ? (type === 'user' ? true : false) : true} onChange={() => setAccess(!access)} />
                                     <span className="custom-toggle-slider rounded-circle" />
                                   </label>
                                 </div>

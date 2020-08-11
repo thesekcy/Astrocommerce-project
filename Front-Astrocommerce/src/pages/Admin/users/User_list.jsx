@@ -59,7 +59,7 @@ function UserList() {
             <div className="row pd-t-40">
               <div className="col-md text-right">
                 {user ? (
-                  user.type == 'admin' ? (
+                  user.type === 'admin' ? (
                     <Link to="/admin/usuarios/novo" className="btn btn-default">
                       Novo Administrator | Editor
                     </Link>
@@ -92,7 +92,7 @@ function UserList() {
                       <tbody>
                         {users
                           ? users.data.map((item, key) => {
-                              return item.type == 'admin' ? (
+                              return item.type === 'admin' ? (
                                 <tr className="table-row link-table" key={key} onClick={() => handlerUser(item.id)}>
                                   <th scope="row">{item.name}</th>
                                   <th>{item.email}</th>
@@ -130,7 +130,7 @@ function UserList() {
                       <tbody>
                         {users
                           ? users.data.map((item, key) => {
-                              return item.type == 'editor' ? (
+                              return item.type === 'editor' ? (
                                 <tr className="table-row link-table" key={key} onClick={() => handlerUser(item.id)}>
                                   <th scope="row">{item.name}</th>
                                   <th>{item.email}</th>
@@ -170,7 +170,7 @@ function UserList() {
                       <tbody>
                         {users
                           ? users.data.map((item, key) => {
-                              return item.type == 'user' ? (
+                              return item.type === 'user' ? (
                                 <tr className="table-row link-table" key={key} onClick={() => handlerUser(item.id)}>
                                   <th scope="row">{item.name}</th>
                                   <th>{item.email}</th>

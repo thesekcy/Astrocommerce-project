@@ -10,13 +10,9 @@ class ProductsController extends Controller
 {
     public function index()
     {
-
         $products = Products::all();
-
         return response()->json($products);
-
     }
-
 
     public function store(Request $req)
     {

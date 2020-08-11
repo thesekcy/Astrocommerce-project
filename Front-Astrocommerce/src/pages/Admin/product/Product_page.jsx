@@ -29,7 +29,7 @@ function ProductPage({ match }) {
   const [image, setImage] = useState('');
   const [vfyImage, setVfyImage] = useState(false);
   const [dtCriacao, setDtCriacao] = useState('');
-  const ordermID = match.params.id;
+  const [ordermID, setOrdemID] = useState(match.params.id);
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -84,7 +84,7 @@ function ProductPage({ match }) {
     saveData.append('name', title);
     saveData.append('visibility', visibility);
     saveData.append('description', description);
-    if (user.type == 'editor') {
+    if (user.type === 'editor') {
       saveData.append('status', 'pending');
     } else {
       saveData.append('status', status);
@@ -98,7 +98,7 @@ function ProductPage({ match }) {
     Axios.post(url, saveData, { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } })
       .then((response) => {
         console.log(response.data);
-        if (response.data == true) {
+        if (response.data === true) {
           setRedirect(true);
         }
       })
@@ -142,10 +142,10 @@ function ProductPage({ match }) {
                     <span className="order-title mb-0 mr-3">
                       <span className="order-number">{produto ? produto.name : ''}</span>
                     </span>
-                    {status == 'pending' ? <badge className="badge badge-warning mr-1 ml-1">Pendente</badge> : ''}
-                    {status == 'waiting' ? <badge className="badge badge-warning mr-1 ml-1">Em Analise</badge> : ''}
-                    {status == 'approved' ? <badge className="badge badge-success mr-1 ml-1">Aprovado</badge> : ''}
-                    {status == 'disapproved' ? <badge className="badge badge-danger mr-1 ml-1">Reprovado</badge> : ''}
+                    {status === 'pending' ? <badge className="badge badge-warning mr-1 ml-1">Pendente</badge> : ''}
+                    {status === 'waiting' ? <badge className="badge badge-warning mr-1 ml-1">Em Analise</badge> : ''}
+                    {status === 'approved' ? <badge className="badge badge-success mr-1 ml-1">Aprovado</badge> : ''}
+                    {status === 'disapproved' ? <badge className="badge badge-danger mr-1 ml-1">Reprovado</badge> : ''}
                     <div className="span ml-4 border-left d-flex">
                       <FiCalendar stroke-width="1.8" color="#96A9C8" size="22" className="ml-4 mr-2" /> {dtCriacao}
                     </div>
@@ -244,7 +244,7 @@ function ProductPage({ match }) {
                       </div>
                     </div>
                     {user ? (
-                      user.type == 'editor' ? (
+                      user.type === 'editor' ? (
                         ''
                       ) : (
                         <div className="row pd-t-20">

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
 import { slide as Menu } from 'react-burger-menu';
 import { Context } from '../../context/authContext';
 
@@ -10,9 +9,8 @@ import { BsArrowRight } from 'react-icons/bs';
 
 export default function NavUser() {
   const [MenuOpen, setMenuOpen] = useState(false);
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const [scrollled, setScrollled] = useState(false);
-  const [userName, setUserName] = useState('');
 
   const { authenticated, user } = useContext(Context);
 

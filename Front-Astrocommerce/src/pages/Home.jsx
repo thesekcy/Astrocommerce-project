@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
-import HomeProduct from '../components/HomeProduct/HomeProduct';
-import NavUser from '../components/NavUser/NavUser';
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import HomeProduct from "../components/HomeProduct/HomeProduct";
+import NavUser from "../components/NavUser/NavUser";
 
-import loadingGif from '../assets/img/loading.gif';
+import loadingGif from "../assets/img/loading.gif";
 
 function Home() {
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState("");
   const [loading, setLoading] = useState(true);
 
   let vfyProducts = false;
@@ -14,8 +14,8 @@ function Home() {
   useEffect(() => {
     function getProducts() {
       var config = {
-        method: 'post',
-        url: 'http://127.0.0.1:8000/api/products',
+        method: "post",
+        url: "http://127.0.0.1:8000/api/products",
       };
 
       Axios(config)
@@ -59,21 +59,23 @@ function Home() {
             <div className="row pd-t-100 pd-b-40 justify-content-center">
               {product
                 ? product.data.map((item, key) => {
-                    if (item.status == 'approved') {
+                    if (item.status === "approved") {
                       if (item.visibility == true) {
                         vfyProducts = true;
                         return <HomeProduct key={key} data={item} />;
                       }
                     }
                   })
-                : ''}
+                : ""}
 
               {!vfyProducts ? (
                 <div className="col-md">
-                  <h2 class="text-center">Não há produtos para ser mostrado.</h2>
+                  <h2 class="text-center">
+                    Não há produtos para ser mostrado.
+                  </h2>
                 </div>
               ) : (
-                ''
+                ""
               )}
             </div>
           </div>

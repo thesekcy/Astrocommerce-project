@@ -8,7 +8,6 @@ import { FaFacebookF, FaRoad, FaMapMarkerAlt } from 'react-icons/fa';
 import { FiUser, FiMail, FiLock, FiPhone, FiHome, FiMap } from 'react-icons/fi';
 import { AiOutlineFieldNumber } from 'react-icons/ai';
 import { MdLocationCity } from 'react-icons/md';
-// import { Container } from './styles';
 
 function initialValues() {
   return { email: '', name: '', password: '', password_confirmation: '', gender: 'masculine', phone: '', end: '', end_num: '', cep: '', district: '', city: '', state: '' };
@@ -79,7 +78,7 @@ function Register() {
     const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let verify = true;
 
-    const { name, email, password, password_confirmation, gender, phone } = values;
+    const { name, email, password, password_confirmation, phone } = values;
 
     if (name.length < 4) {
       setVfyName(false);
@@ -127,7 +126,7 @@ function Register() {
   }
 
   function registerFinish() {
-    const { name, email, password, password_confirmation, gender, phone, end, end_num, cep, district, state, city } = values;
+    const { end, end_num, cep, district, state, city } = values;
     let verify = true;
 
     if (end.length < 4) {
